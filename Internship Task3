@@ -1,0 +1,45 @@
+import random
+
+def rps_game():
+    choices = ['rock', 'paper', 'scissors']
+    outcomes = {
+        ('rock', 'scissors'): 'win',
+        ('scissors', 'paper'): 'win',
+        ('paper', 'rock'): 'win',
+        ('scissors', 'rock'): 'lose',
+        ('paper', 'scissors'): 'lose',
+        ('rock', 'paper'): 'lose',
+    }
+
+    user_score, computer_score = 0, 0
+
+    while True:
+        user_choice = input("Your move (rock, paper, scissors): ").strip().lower()
+        if user_choice == 'exit':
+            break
+        
+        if user_choice not in choices:
+            print("Invalid input. Please enter rock, paper, or scissors.")
+            continue
+
+        computer_choice = random.choice(choices)
+        print(f"Computer chose: {computer_choice}")
+        
+        if user_choice == computer_choice:
+            print("It's a tie!")
+        else:
+            outcome = outcomes.get((user_choice, computer_choice), 'win')
+            if outcome == 'win':
+                user_score += 1
+                print("You win!")
+            else:
+                computer_score += 1
+                print("You lose!")
+
+        print(f"Score - You: {user_score} | Computer: {computer_score}")
+
+        if input("Play again? (yes/no): ").strip().lower() != 'yes':
+            break
+
+if __name__ == "__main__":
+    rps_game()
